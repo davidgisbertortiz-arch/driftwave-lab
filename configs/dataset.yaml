@@ -1,0 +1,18 @@
+# Dataset generation configuration
+# See PROJECT_SPEC.md § 6 for the data-generation strategy.
+
+solver_config: configs/solver.yaml
+
+n_trajectories: 50
+output_dir: data/raw
+
+parameter_ranges:
+  alpha: [0.5, 1.5]
+  kappa: [0.8, 1.2]
+
+split:
+  train: 0.7
+  val: 0.15
+  test: 0.15
+
+seed: 123

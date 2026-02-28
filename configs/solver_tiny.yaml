@@ -1,0 +1,30 @@
+# Tiny solver configuration for smoke tests
+# Runs fast (~100 steps on a 32x32 grid).
+
+grid:
+  nx: 32
+  ny: 32
+  lx: 20.0
+  ly: 20.0
+
+physics:
+  alpha: 1.0
+  kappa: 1.0
+  D: 0.01
+  nu: 0.01
+
+time:
+  dt: 0.05
+  n_steps: 100
+  save_every: 50
+
+initial_condition:
+  type: random_perturbation
+  amplitude: 1.0e-4
+
+seed: 0
+verbose: false
+
+output:
+  dir: outputs
+  prefix: hw_tiny

@@ -1,0 +1,20 @@
+# U-Net baseline training configuration
+# See PROJECT_SPEC.md § 4 Track A.
+
+model:
+  name: unet
+  in_channels: 2     # [n, phi]
+  out_channels: 2
+
+training:
+  epochs: 50
+  batch_size: 16
+  lr: 1.0e-3
+  scheduler: cosine
+
+data:
+  dataset_dir: data/raw
+  input_fields: [n, phi]
+  target: next_step
+
+seed: 0

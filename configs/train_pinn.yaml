@@ -1,0 +1,17 @@
+# PINN inverse-problem training configuration
+# See PROJECT_SPEC.md § 4 Track B.
+
+model:
+  name: pinn_inverse
+  target_params: [alpha, kappa, D, nu]
+
+training:
+  epochs: 200
+  lr: 1.0e-3
+
+data:
+  trajectory: data/raw/trajectory_000.npz
+  noise_std: 0.01
+  n_obs_frames: 10
+
+seed: 0

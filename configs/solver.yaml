@@ -1,0 +1,30 @@
+# Default solver configuration
+# See docs/hw_equations.md for parameter descriptions.
+
+grid:
+  nx: 128
+  ny: 128
+  lx: 40.0        # domain size in x (normalised units)
+  ly: 40.0        # domain size in y (normalised units)
+
+physics:
+  alpha: 1.0      # adiabaticity / resistive coupling
+  kappa: 1.0      # background density-gradient drive
+  D: 0.005        # density diffusion
+  nu: 0.005       # viscosity
+
+time:
+  dt: 0.025
+  n_steps: 4000
+  save_every: 100
+
+initial_condition:
+  type: random_perturbation
+  amplitude: 1.0e-4
+
+seed: 42
+verbose: true
+
+output:
+  dir: outputs
+  prefix: hw_default

@@ -1,0 +1,23 @@
+# FNO 2D training configuration
+# See PROJECT_SPEC.md § 4 Track A.
+
+model:
+  name: fno2d
+  in_channels: 2     # [n, phi]
+  out_channels: 2
+  modes: 16
+  width: 64
+  n_layers: 4
+
+training:
+  epochs: 100
+  batch_size: 8
+  lr: 1.0e-3
+  scheduler: cosine
+
+data:
+  dataset_dir: data/raw
+  input_fields: [n, phi]
+  target: next_step
+
+seed: 0
