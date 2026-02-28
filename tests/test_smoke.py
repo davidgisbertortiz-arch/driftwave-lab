@@ -92,7 +92,7 @@ class TestPlaceholderScripts:
         "script",
         [
             # run_solver.py is now a real script — tested in test_solver.py
-            "generate_dataset.py",
+            # generate_dataset.py is now a real script — tested in test_generator.py
             "train.py",
             "rollout_demo.py",
             "benchmark.py",

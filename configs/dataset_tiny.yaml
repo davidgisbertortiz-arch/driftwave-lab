@@ -1,0 +1,41 @@
+# Tiny dataset configuration for CI / smoke tests
+# Generates 6 very short trajectories on a 16x16 grid.
+#
+# Usage:
+#   python scripts/generate_dataset.py --config configs/dataset_tiny.yaml
+
+grid:
+  nx: 16
+  ny: 16
+  lx: 20.0
+  ly: 20.0
+
+time:
+  dt: 0.05
+  n_steps: 40
+  save_every: 10
+
+initial_condition:
+  amplitude: 1.0e-4
+
+n_trajectories: 4
+
+split:
+  train: 2
+  val: 1
+  test: 1
+
+n_ood: 2
+
+parameter_ranges:
+  alpha: [0.5, 1.5]
+  kappa: [0.8, 1.2]
+  D:     [0.005, 0.02]
+  nu:    [0.005, 0.02]
+
+ood:
+  alpha: [1.5, 2.5]
+
+seed: 0
+verbose: false
+output_dir: data/tiny

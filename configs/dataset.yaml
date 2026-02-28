@@ -1,18 +1,43 @@
-# Dataset generation configuration
+# Default dataset generation configuration
 # See PROJECT_SPEC.md § 6 for the data-generation strategy.
+#
+# Usage:
+#   python scripts/generate_dataset.py --config configs/dataset.yaml
 
-solver_config: configs/solver.yaml
+grid:
+  nx: 64
+  ny: 64
+  lx: 40.0
+  ly: 40.0
 
+time:
+  dt: 0.025
+  n_steps: 2000
+  save_every: 50
+
+initial_condition:
+  amplitude: 1.0e-4
+
+# Total in-distribution = train + val + test
 n_trajectories: 50
-output_dir: data/raw
+
+split:
+  train: 0.7       # 35
+  val:   0.15       # 8
+  test:  0.15       # 7
+
+# Out-of-distribution trajectories (added on top of n_trajectories)
+n_ood: 5
 
 parameter_ranges:
   alpha: [0.5, 1.5]
   kappa: [0.8, 1.2]
+  D:     [0.005, 0.02]
+  nu:    [0.005, 0.02]
 
-split:
-  train: 0.7
-  val: 0.15
-  test: 0.15
+ood:
+  alpha: [1.5, 2.5]
 
 seed: 123
+verbose: true
+output_dir: data/raw
