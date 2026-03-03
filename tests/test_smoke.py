@@ -105,29 +105,25 @@ class TestPlaceholderModules:
 
 
 # ---------------------------------------------------------------------------
-# Placeholder script tests
+# Real script --help tests (non-trivial scripts that need special args)
 # ---------------------------------------------------------------------------
 
 
-class TestPlaceholderScripts:
-    """Verify placeholder scripts run without error (exit 0) and print a message."""
+class TestRealScriptHelp:
+    """Verify that real CLI scripts display help without crashing."""
 
     @pytest.mark.parametrize(
         "script",
         [
-            # run_solver.py is now a real script — tested in test_solver.py
-            # generate_dataset.py is now a real script — tested in test_generator.py
-            # train.py / rollout_demo.py / benchmark.py are now real scripts
-            # — tested in test_ml_pipeline.py
             "make_readme_assets.py",
         ],
     )
-    def test_script_runs_cleanly(self, script: str) -> None:
+    def test_script_help(self, script: str) -> None:
         result = subprocess.run(
-            [sys.executable, str(SCRIPTS_DIR / script)],
+            [sys.executable, str(SCRIPTS_DIR / script), "--help"],
             capture_output=True,
             text=True,
             timeout=10,
         )
-        assert result.returncode == 0, f"{script} exited with {result.returncode}: {result.stderr}"
-        assert len(result.stdout) > 0, f"{script} produced no output"
+        assert result.returncode == 0, f"{script} --help failed: {result.stderr}"
+        assert "usage" in result.stdout.lower() or len(result.stdout) > 0

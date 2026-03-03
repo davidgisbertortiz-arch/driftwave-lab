@@ -1,0 +1,20 @@
+# Configuration for README asset generation
+# Usage: python scripts/make_readme_assets.py --config configs/assets.yaml
+
+output_dir: assets
+
+# Solver parameters for ground-truth trajectory
+solver:
+  nx: 64
+  n_steps: 2000
+  save_every: 50
+  seed: 0
+
+# Rollout parameters
+rollout_steps: 30
+fps: 8
+
+# Model checkpoints (set to actual paths after training)
+# If a checkpoint does not exist, the script produces solver-only assets.
+fno_checkpoint: checkpoints/fno2d_best.pt
+unet_checkpoint: checkpoints/unet_best.pt

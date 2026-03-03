@@ -4,6 +4,18 @@
 
 > Pseudo-spectral Hasegawa–Wakatani solver · Fourier Neural Operator & U-Net surrogates · PINN-based parameter inference
 
+<p align="center">
+  <img src="assets/hero.gif" alt="Solver vs FNO rollout" width="720" />
+</p>
+
+<p align="center">
+  <em>Left: pseudo-spectral HW solver ground truth — Right: FNO surrogate autoregressive rollout</em>
+</p>
+
+<p align="center">
+  <a href="#visual-assets">spectra</a> · <a href="#visual-assets">benchmark</a> · <a href="#visual-assets">error analysis</a>
+</p>
+
 ---
 
 ## What is this?
@@ -38,9 +50,9 @@ For the full scientific and technical specification, see [`PROJECT_SPEC.md`](PRO
 | **1** | Pseudo-spectral HW solver MVP | ✅ Done |
 | **2** | Parameterised multi-trajectory dataset generation | ✅ Done |
 | **3** | CNN / U-Net baseline surrogate | ✅ Done |
-| **4** | FNO 2D hero model + benchmarks + visual assets | ✅ Done |
-| **5** | PINN / inverse parameter-estimation track | 🔲 Planned |
-| **6** | Polish, reproducibility, release | 🔲 Planned |
+| **4** | FNO 2D hero model + benchmarking | ✅ Done |
+| **5** | Visual assets, README polish, presentation layer | ✅ Done |
+| **6** | PINN / inverse parameter-estimation track | 🔲 Planned |
 
 ## Architecture
 
@@ -61,17 +73,32 @@ assets/                # README visual assets (GIFs, plots)
 docs/                  # Technical documentation
 ```
 
-## Planned visual assets
+## Visual assets
 
-Once the solver and ML pipelines are operational, the repository will feature:
+All figures and animations below are generated reproducibly by a single command (see [Generate visual assets](#generate-visual-assets)).
 
-| Asset | Description |
-|-------|-------------|
-| `hero.gif` | Side-by-side animation: ground-truth solver vs FNO rollout |
-| `error.gif` | Animated prediction-error field over rollout time |
-| `spectra.png` | Energy-spectrum comparison (solver / U-Net / FNO) |
-| `benchmark.png` | Runtime bar chart with speedup annotations |
-| `pinn_inverse.png` | Recovered-parameter convergence (inverse track) |
+| | |
+|:---:|:---:|
+| ![Energy spectra](assets/spectra.png) | ![Runtime benchmark](assets/benchmark.png) |
+| *Energy spectra — solver vs ML surrogates* | *Inference speedup over the spectral solver* |
+
+<details>
+<summary><strong>More: rollout error & comparison panels</strong></summary>
+
+<p align="center">
+  <img src="assets/error.gif" alt="Rollout error" width="480" />
+</p>
+
+| | |
+|:---:|:---:|
+| ![Rollout error](assets/rollout_error.png) | ![Comparison](assets/rollout_comparison.png) |
+| *MSE & relative L2 vs rollout horizon* | *Truth / Prediction / Error panel* |
+
+</details>
+
+> **Note:** If no ML checkpoints are available, the script runs in *solver-only mode* —
+> `hero.gif` shows two solver realisations with different seeds, and spectra/benchmark
+> are omitted.
 
 ## Quickstart
 
@@ -138,6 +165,21 @@ python scripts/benchmark.py --checkpoint checkpoints/fno2d_best.pt
 ```
 
 See [`docs/fno_model.md`](docs/fno_model.md) for full ML pipeline documentation.
+
+### Generate visual assets
+
+```bash
+# Solver-only mode (always works, no ML required)
+python scripts/make_readme_assets.py
+
+# With a custom config (e.g. higher resolution)
+python scripts/make_readme_assets.py --config configs/assets.yaml
+```
+
+Generated files are written to `assets/`.  To get the full ML-comparison
+figures (including `spectra.png` and `benchmark.png`), first train a model
+(see [Train an ML surrogate](#train-an-ml-surrogate)) so that checkpoint
+files exist under `checkpoints/`.
 
 ### Requirements
 
