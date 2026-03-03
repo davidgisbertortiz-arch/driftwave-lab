@@ -126,9 +126,7 @@ def main(argv: list[str] | None = None) -> None:
     # ------------------------------------------------------------------
     from driftwave_lab.solver.diagnostics import trajectory_diagnostics
 
-    diag = trajectory_diagnostics(
-        arrays["n"], arrays["omega"], arrays["phi"], grid
-    )
+    diag = trajectory_diagnostics(arrays["n"], arrays["omega"], arrays["phi"], grid)
     print(
         f"  energy  : {diag['energy'][0]:.3e} → {diag['energy'][-1]:.3e}\n"
         f"  enstrophy: {diag['enstrophy'][0]:.3e} → {diag['enstrophy'][-1]:.3e}\n"
@@ -139,6 +137,7 @@ def main(argv: list[str] | None = None) -> None:
 # ------------------------------------------------------------------
 # Simple snapshot figure
 # ------------------------------------------------------------------
+
 
 def _save_snapshot_plot(
     arrays: dict[str, np.ndarray],

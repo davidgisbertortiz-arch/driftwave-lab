@@ -16,6 +16,7 @@ SCRIPTS_DIR = Path(__file__).resolve().parents[1] / "scripts"
 # Package import tests
 # ---------------------------------------------------------------------------
 
+
 class TestPackageImport:
     """Verify that driftwave_lab and all subpackages can be imported."""
 
@@ -46,6 +47,7 @@ class TestPackageImport:
 # ---------------------------------------------------------------------------
 # Placeholder module import tests
 # ---------------------------------------------------------------------------
+
 
 class TestPlaceholderModules:
     """Ensure every placeholder module file is importable without errors."""
@@ -84,6 +86,7 @@ class TestPlaceholderModules:
 # ---------------------------------------------------------------------------
 # Placeholder script tests
 # ---------------------------------------------------------------------------
+
 
 class TestPlaceholderScripts:
     """Verify placeholder scripts run without error (exit 0) and print a message."""

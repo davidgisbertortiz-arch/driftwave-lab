@@ -19,6 +19,7 @@ if TYPE_CHECKING:
 # Scalar diagnostics
 # ---------------------------------------------------------------------------
 
+
 def field_norm(field: NDArray) -> float:
     """L² norm of a real-space field (RMS × √N)."""
     return float(np.sqrt(np.mean(field**2)))
@@ -48,9 +49,8 @@ def enstrophy(omega: NDArray) -> float:
 # Isotropic (shell-averaged) spectrum
 # ---------------------------------------------------------------------------
 
-def isotropic_spectrum(
-    field: NDArray, grid: SpectralGrid
-) -> tuple[NDArray, NDArray]:
+
+def isotropic_spectrum(field: NDArray, grid: SpectralGrid) -> tuple[NDArray, NDArray]:
     """Compute the 1-D isotropic energy spectrum of a real-space field.
 
     Parameters
@@ -88,6 +88,7 @@ def isotropic_spectrum(
 # ---------------------------------------------------------------------------
 # Trajectory-level diagnostics
 # ---------------------------------------------------------------------------
+
 
 def trajectory_diagnostics(
     n_series: NDArray,

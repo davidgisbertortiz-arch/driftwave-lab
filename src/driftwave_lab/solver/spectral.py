@@ -17,6 +17,7 @@ from numpy.typing import NDArray
 # Spectral grid
 # ---------------------------------------------------------------------------
 
+
 class SpectralGrid:
     """Pre-computed wavenumber arrays and de-aliasing mask for a 2-D periodic box.
 
@@ -76,21 +77,17 @@ class SpectralGrid:
         # 2/3-rule de-aliasing mask
         kx_max = 2.0 * np.pi / lx * (nx // 2)
         ky_max = 2.0 * np.pi / ly * (ny // 2)
-        mask = (np.abs(self.KX) < (2.0 / 3.0) * kx_max) & (
-            np.abs(self.KY) < (2.0 / 3.0) * ky_max
-        )
+        mask = (np.abs(self.KX) < (2.0 / 3.0) * kx_max) & (np.abs(self.KY) < (2.0 / 3.0) * ky_max)
         self.dealias_mask: NDArray = mask.astype(np.float64)
 
     def __repr__(self) -> str:
-        return (
-            f"SpectralGrid(nx={self.nx}, ny={self.ny},"
-            f" lx={self.lx}, ly={self.ly})"
-        )
+        return f"SpectralGrid(nx={self.nx}, ny={self.ny}, lx={self.lx}, ly={self.ly})"
 
 
 # ---------------------------------------------------------------------------
 # Spectral derivative helpers
 # ---------------------------------------------------------------------------
+
 
 def fft2(field: NDArray) -> NDArray:
     """Forward real FFT (wrapper for consistency)."""
@@ -129,9 +126,8 @@ def solve_poisson(omega_hat: NDArray, grid: SpectralGrid) -> NDArray:
 # Poisson bracket  {a, b} = ∂_x a ∂_y b  −  ∂_y a ∂_x b
 # ---------------------------------------------------------------------------
 
-def poisson_bracket(
-    a_hat: NDArray, b_hat: NDArray, grid: SpectralGrid
-) -> NDArray:
+
+def poisson_bracket(a_hat: NDArray, b_hat: NDArray, grid: SpectralGrid) -> NDArray:
     """Compute the Poisson bracket {a, b} and return de-aliased Fourier result.
 
     Uses the simple "multiply in physical space, de-alias" approach

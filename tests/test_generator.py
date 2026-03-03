@@ -74,9 +74,17 @@ class TestSampling:
     @pytest.fixture()
     def tiny_cfg(self) -> DatasetConfig:
         return DatasetConfig(
-            nx=16, ny=16, lx=20.0, ly=20.0,
-            dt=0.05, n_steps=20, save_every=10,
-            n_train=3, n_val=1, n_test=1, n_ood=2,
+            nx=16,
+            ny=16,
+            lx=20.0,
+            ly=20.0,
+            dt=0.05,
+            n_steps=20,
+            save_every=10,
+            n_train=3,
+            n_val=1,
+            n_test=1,
+            n_ood=2,
             seed=42,
         )
 
@@ -128,14 +136,26 @@ class TestSampling:
 class TestRunSingle:
     def test_shapes_and_metadata(self):
         cfg = DatasetConfig(
-            nx=16, ny=16, lx=20.0, ly=20.0,
-            dt=0.05, n_steps=20, save_every=10,
-            n_train=1, n_val=0, n_test=0, n_ood=0,
+            nx=16,
+            ny=16,
+            lx=20.0,
+            ly=20.0,
+            dt=0.05,
+            n_steps=20,
+            save_every=10,
+            n_train=1,
+            n_val=0,
+            n_test=0,
+            n_ood=0,
             seed=0,
         )
         spec = TrajectorySpec(
-            index=0, split="train",
-            alpha=1.0, kappa=1.0, D=0.01, nu=0.01,
+            index=0,
+            split="train",
+            alpha=1.0,
+            kappa=1.0,
+            D=0.01,
+            nu=0.01,
             ic_seed=99,
         )
         arrays, meta, elapsed = run_single_trajectory(spec, cfg)
@@ -151,14 +171,26 @@ class TestRunSingle:
 
     def test_no_nans(self):
         cfg = DatasetConfig(
-            nx=16, ny=16, lx=20.0, ly=20.0,
-            dt=0.05, n_steps=20, save_every=10,
-            n_train=1, n_val=0, n_test=0, n_ood=0,
+            nx=16,
+            ny=16,
+            lx=20.0,
+            ly=20.0,
+            dt=0.05,
+            n_steps=20,
+            save_every=10,
+            n_train=1,
+            n_val=0,
+            n_test=0,
+            n_ood=0,
             seed=1,
         )
         spec = TrajectorySpec(
-            index=0, split="train",
-            alpha=0.8, kappa=1.1, D=0.01, nu=0.01,
+            index=0,
+            split="train",
+            alpha=0.8,
+            kappa=1.1,
+            D=0.01,
+            nu=0.01,
             ic_seed=7,
         )
         arrays, _, _ = run_single_trajectory(spec, cfg)
@@ -175,9 +207,17 @@ class TestGenerateDataset:
     @pytest.fixture()
     def tiny_dataset(self, tmp_path: Path) -> GenerationResult:
         cfg = DatasetConfig(
-            nx=16, ny=16, lx=20.0, ly=20.0,
-            dt=0.05, n_steps=20, save_every=10,
-            n_train=2, n_val=1, n_test=1, n_ood=1,
+            nx=16,
+            ny=16,
+            lx=20.0,
+            ly=20.0,
+            dt=0.05,
+            n_steps=20,
+            save_every=10,
+            n_train=2,
+            n_val=1,
+            n_test=1,
+            n_ood=1,
             seed=42,
             output_dir=str(tmp_path / "data"),
         )
@@ -231,16 +271,32 @@ class TestGenerateDataset:
     def test_reproducibility(self, tmp_path: Path):
         """Two runs with the same seed produce identical parameters."""
         cfg1 = DatasetConfig(
-            nx=16, ny=16, lx=20.0, ly=20.0,
-            dt=0.05, n_steps=20, save_every=10,
-            n_train=2, n_val=1, n_test=1, n_ood=1,
+            nx=16,
+            ny=16,
+            lx=20.0,
+            ly=20.0,
+            dt=0.05,
+            n_steps=20,
+            save_every=10,
+            n_train=2,
+            n_val=1,
+            n_test=1,
+            n_ood=1,
             seed=99,
             output_dir=str(tmp_path / "run1"),
         )
         cfg2 = DatasetConfig(
-            nx=16, ny=16, lx=20.0, ly=20.0,
-            dt=0.05, n_steps=20, save_every=10,
-            n_train=2, n_val=1, n_test=1, n_ood=1,
+            nx=16,
+            ny=16,
+            lx=20.0,
+            ly=20.0,
+            dt=0.05,
+            n_steps=20,
+            save_every=10,
+            n_train=2,
+            n_val=1,
+            n_test=1,
+            n_ood=1,
             seed=99,
             output_dir=str(tmp_path / "run2"),
         )

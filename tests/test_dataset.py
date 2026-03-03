@@ -28,14 +28,23 @@ from driftwave_lab.data.dataset import (  # noqa: E402, I001
 # Shared fixture: tiny generated dataset
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture(scope="module")
 def tiny_data_dir(tmp_path_factory: pytest.TempPathFactory) -> Path:
     """Generate a tiny dataset once for the entire module."""
     out = tmp_path_factory.mktemp("dataset")
     cfg = DatasetConfig(
-        nx=16, ny=16, lx=20.0, ly=20.0,
-        dt=0.05, n_steps=20, save_every=10,
-        n_train=2, n_val=1, n_test=1, n_ood=1,
+        nx=16,
+        ny=16,
+        lx=20.0,
+        ly=20.0,
+        dt=0.05,
+        n_steps=20,
+        save_every=10,
+        n_train=2,
+        n_val=1,
+        n_test=1,
+        n_ood=1,
         seed=42,
         output_dir=str(out),
     )

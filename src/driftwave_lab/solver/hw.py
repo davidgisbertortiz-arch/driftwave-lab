@@ -37,15 +37,16 @@ if TYPE_CHECKING:
 # Simulation parameters
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class HWParams:
     """Physical and numerical parameters for a Hasegawa–Wakatani run."""
 
-    alpha: float = 1.0     # adiabaticity / parallel-electron coupling
-    kappa: float = 1.0     # background density-gradient drive
-    D: float = 0.01        # density diffusion
-    nu: float = 0.01       # viscosity
-    dt: float = 0.01       # time step
+    alpha: float = 1.0  # adiabaticity / parallel-electron coupling
+    kappa: float = 1.0  # background density-gradient drive
+    D: float = 0.01  # density diffusion
+    nu: float = 0.01  # viscosity
+    dt: float = 0.01  # time step
     n_steps: int = 10_000  # total integration steps
     save_every: int = 100  # snapshot cadence (in steps)
 
@@ -54,11 +55,12 @@ class HWParams:
 # State container
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class HWState:
     """Instantaneous solver state in Fourier space."""
 
-    n_hat: NDArray      # density fluctuation (Fourier)
+    n_hat: NDArray  # density fluctuation (Fourier)
     omega_hat: NDArray  # vorticity (Fourier)
     step: int = 0
     time: float = 0.0
@@ -76,6 +78,7 @@ class HWState:
 # ---------------------------------------------------------------------------
 # Right-hand side
 # ---------------------------------------------------------------------------
+
 
 def _rhs(
     n_hat: NDArray,
@@ -109,6 +112,7 @@ def _rhs(
 # ---------------------------------------------------------------------------
 # Time integrator — RK2 (Heun / improved Euler)
 # ---------------------------------------------------------------------------
+
 
 def _step_rk2(
     state: HWState,
@@ -146,6 +150,7 @@ def _step_rk2(
 # Trajectory container
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class HWTrajectory:
     """Collected snapshots from a solver run."""
@@ -168,6 +173,7 @@ class HWTrajectory:
 # ---------------------------------------------------------------------------
 # Main driver
 # ---------------------------------------------------------------------------
+
 
 def solve(
     grid: SpectralGrid,
@@ -222,9 +228,7 @@ def solve(
     return traj
 
 
-def _record_snapshot(
-    traj: HWTrajectory, state: HWState, grid: SpectralGrid
-) -> None:
+def _record_snapshot(traj: HWTrajectory, state: HWState, grid: SpectralGrid) -> None:
     fields = state.fields(grid)
     traj.times.append(state.time)
     traj.n_snapshots.append(fields["n"].copy())
