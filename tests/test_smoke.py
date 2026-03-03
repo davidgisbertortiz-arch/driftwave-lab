@@ -96,9 +96,8 @@ class TestPlaceholderScripts:
         [
             # run_solver.py is now a real script — tested in test_solver.py
             # generate_dataset.py is now a real script — tested in test_generator.py
-            "train.py",
-            "rollout_demo.py",
-            "benchmark.py",
+            # train.py / rollout_demo.py / benchmark.py are now real scripts
+            # — tested in test_ml_pipeline.py
             "make_readme_assets.py",
         ],
     )

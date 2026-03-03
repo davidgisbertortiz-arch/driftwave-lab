@@ -36,9 +36,9 @@ For the full scientific and technical specification, see [`PROJECT_SPEC.md`](PRO
 |-------|-----------|--------|
 | **0** | Repository scaffold, CI, dev tooling | ✅ Done |
 | **1** | Pseudo-spectral HW solver MVP | ✅ Done |
-| **2** | Parameterised multi-trajectory dataset generation | 🔲 Planned |
-| **3** | CNN / U-Net baseline surrogate | 🔲 Planned |
-| **4** | FNO 2D hero model + benchmarks + visual assets | 🔲 Planned |
+| **2** | Parameterised multi-trajectory dataset generation | ✅ Done |
+| **3** | CNN / U-Net baseline surrogate | ✅ Done |
+| **4** | FNO 2D hero model + benchmarks + visual assets | ✅ Done |
 | **5** | PINN / inverse parameter-estimation track | 🔲 Planned |
 | **6** | Polish, reproducibility, release | 🔲 Planned |
 
@@ -104,10 +104,46 @@ python scripts/run_solver.py --config configs/solver_tiny.yaml
 Outputs (NPZ trajectory + snapshot PNG) are written to `outputs/`.
 See [`docs/hw_equations.md`](docs/hw_equations.md) for the implemented equations.
 
+### Generate a training dataset
+
+```bash
+python scripts/generate_dataset.py --config configs/dataset_tiny.yaml
+```
+
+### Train an ML surrogate
+
+```bash
+# Install ML dependencies
+pip install -e ".[ml]"
+
+# FNO hero model (requires dataset in data/raw/)
+python scripts/train.py --config configs/train_fno.yaml
+
+# U-Net baseline
+python scripts/train.py --config configs/train_unet.yaml
+```
+
+### Autoregressive rollout
+
+```bash
+python scripts/rollout_demo.py \
+    --checkpoint checkpoints/fno2d_best.pt \
+    --steps 30
+```
+
+### Runtime benchmark
+
+```bash
+python scripts/benchmark.py --checkpoint checkpoints/fno2d_best.pt
+```
+
+See [`docs/fno_model.md`](docs/fno_model.md) for full ML pipeline documentation.
+
 ### Requirements
 
 - Python ≥ 3.11
 - Core: NumPy, PyYAML, Matplotlib
+- ML (optional): PyTorch ≥ 2.0 (`pip install -e ".[ml]"`)
 
 ## Running checks
 

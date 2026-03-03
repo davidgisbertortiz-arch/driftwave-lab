@@ -17,4 +17,6 @@ data:
   input_fields: [n, phi]
   target: next_step
 
+checkpoint_dir: checkpoints
+
 seed: 0

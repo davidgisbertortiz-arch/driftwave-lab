@@ -1,0 +1,25 @@
+# Tiny FNO config for CI / unit tests (fast, small grid)
+# Use with: python scripts/train.py --config configs/train_fno_tiny.yaml
+
+model:
+  name: fno2d
+  in_channels: 2
+  out_channels: 2
+  modes: 4
+  width: 8
+  n_layers: 2
+
+training:
+  epochs: 2
+  batch_size: 4
+  lr: 1.0e-3
+  scheduler: cosine
+
+data:
+  dataset_dir: data/raw
+  input_fields: [n, phi]
+  target: next_step
+
+checkpoint_dir: checkpoints
+
+seed: 42
