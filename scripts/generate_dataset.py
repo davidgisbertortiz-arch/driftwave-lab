@@ -11,7 +11,6 @@ Usage::
 from __future__ import annotations
 
 import argparse
-import sys
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -29,8 +28,8 @@ def main(argv: list[str] | None = None) -> None:
     # ------------------------------------------------------------------
     # Load config
     # ------------------------------------------------------------------
-    from driftwave_lab.utils.config import load_yaml
     from driftwave_lab.data.generator import DatasetConfig, generate_dataset
+    from driftwave_lab.utils.config import load_yaml
 
     raw = load_yaml(args.config)
     cfg = DatasetConfig.from_dict(raw)

@@ -7,10 +7,8 @@ HWNextStepDataset and the manifest helpers.  Tests are skipped if
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
-import numpy as np
 import pytest
 
 from driftwave_lab.data.generator import DatasetConfig, generate_dataset
@@ -18,7 +16,7 @@ from driftwave_lab.data.generator import DatasetConfig, generate_dataset
 # Skip entire module if torch is missing
 torch = pytest.importorskip("torch")
 
-from driftwave_lab.data.dataset import (  # noqa: E402
+from driftwave_lab.data.dataset import (  # noqa: E402, I001
     HWNextStepDataset,
     get_split_files,
     get_split_metadata,
@@ -113,8 +111,8 @@ class TestHWNextStepDataset:
 
     def test_preload(self, manifest_path: Path):
         ds = HWNextStepDataset(manifest_path, split="train", preload=True)
-        assert len(ds._traj_cache) == ds.n_trajectories  # noqa: SLF001
-        inp, tgt = ds[0]
+        assert len(ds._traj_cache) == ds.n_trajectories  # type: ignore[attr-defined]
+        inp, _tgt = ds[0]
         assert inp.shape[0] == 2
 
     def test_val_split(self, manifest_path: Path):
@@ -149,7 +147,7 @@ class TestHWNextStepDataset:
         # Get pairs from the same trajectory
         # First trajectory has n_steps=20, save_every=10 → 3 snapshots → 2 pairs
         # (traj_idx, time_step) pairs: (0,0) and (0,1)
-        idx_map = ds._index_map  # noqa: SLF001
+        idx_map = ds._index_map  # type: ignore[attr-defined]
 
         # Find consecutive pairs within same trajectory
         for i in range(len(idx_map) - 1):

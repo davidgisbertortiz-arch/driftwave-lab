@@ -42,7 +42,7 @@ class TestDerivatives:
 
     def test_deriv_x_sin(self, grid: SpectralGrid) -> None:
         """∂/∂x sin(x) = cos(x)"""
-        X, Y = np.meshgrid(grid.x, grid.y, indexing="ij")
+        X, _Y = np.meshgrid(grid.x, grid.y, indexing="ij")
         f = np.sin(X)
         expected = np.cos(X)
         result = deriv_x(fft2(f), grid)
@@ -50,7 +50,7 @@ class TestDerivatives:
 
     def test_deriv_y_sin(self, grid: SpectralGrid) -> None:
         """∂/∂y sin(y) = cos(y)"""
-        X, Y = np.meshgrid(grid.x, grid.y, indexing="ij")
+        _X, Y = np.meshgrid(grid.x, grid.y, indexing="ij")
         f = np.sin(Y)
         expected = np.cos(Y)
         result = deriv_y(fft2(f), grid)

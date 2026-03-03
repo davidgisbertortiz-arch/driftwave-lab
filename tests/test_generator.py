@@ -92,7 +92,7 @@ class TestSampling:
     def test_deterministic(self, tiny_cfg: DatasetConfig):
         s1 = sample_trajectory_specs(tiny_cfg)
         s2 = sample_trajectory_specs(tiny_cfg)
-        for a, b in zip(s1, s2):
+        for a, b in zip(s1, s2, strict=True):
             assert a.alpha == b.alpha
             assert a.ic_seed == b.ic_seed
             assert a.split == b.split
@@ -247,7 +247,7 @@ class TestGenerateDataset:
         r1 = generate_dataset(cfg1)
         r2 = generate_dataset(cfg2)
 
-        for e1, e2 in zip(r1.manifest, r2.manifest):
+        for e1, e2 in zip(r1.manifest, r2.manifest, strict=True):
             assert e1["alpha"] == e2["alpha"]
             assert e1["kappa"] == e2["kappa"]
             assert e1["split"] == e2["split"]
@@ -256,7 +256,7 @@ class TestGenerateDataset:
         # Field values should be identical
         f1 = sorted((tmp_path / "run1").glob("traj_*.npz"))
         f2 = sorted((tmp_path / "run2").glob("traj_*.npz"))
-        for a, b in zip(f1, f2):
+        for a, b in zip(f1, f2, strict=True):
             d1 = np.load(str(a))
             d2 = np.load(str(b))
             np.testing.assert_array_equal(d1["n"], d2["n"])

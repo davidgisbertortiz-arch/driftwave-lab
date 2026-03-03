@@ -29,13 +29,21 @@ class SpectralGrid:
     """
 
     __slots__ = (
-        "nx", "ny", "lx", "ly",
-        "dx", "dy",
-        "x", "y",
-        "kx", "ky",
-        "KX", "KY",
-        "K2", "inv_K2",
+        "K2",
+        "KX",
+        "KY",
         "dealias_mask",
+        "dx",
+        "dy",
+        "inv_K2",
+        "kx",
+        "ky",
+        "lx",
+        "ly",
+        "nx",
+        "ny",
+        "x",
+        "y",
     )
 
     def __init__(self, nx: int, ny: int, lx: float, ly: float) -> None:

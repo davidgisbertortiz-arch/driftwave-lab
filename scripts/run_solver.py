@@ -154,7 +154,7 @@ def _save_snapshot_plot(
 
     fig, axes = plt.subplots(1, 3, figsize=(14, 4))
     fields = {"n": arrays["n"][-1], "ω": arrays["omega"][-1], "φ": arrays["phi"][-1]}
-    for ax, (label, fld) in zip(axes, fields.items()):
+    for ax, (label, fld) in zip(axes, fields.items(), strict=False):
         vmax = max(abs(fld.min()), abs(fld.max())) or 1.0
         im = ax.imshow(
             fld.T,
