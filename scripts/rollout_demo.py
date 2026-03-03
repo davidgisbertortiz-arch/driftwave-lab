@@ -27,10 +27,20 @@ from driftwave_lab.models import build_model  # noqa: E402
 def main() -> None:
     parser = argparse.ArgumentParser(description="Autoregressive rollout demo")
     parser.add_argument("--checkpoint", type=str, required=True, help="Path to .pt checkpoint")
-    parser.add_argument("--data", type=str, default=None, help="Path to manifest.json (uses test split)")
+    parser.add_argument(
+        "--data",
+        type=str,
+        default=None,
+        help="Path to manifest.json (uses test split)",
+    )
     parser.add_argument("--steps", type=int, default=20, help="Number of rollout steps")
     parser.add_argument("--device", type=str, default="cpu")
-    parser.add_argument("--save", type=str, default=None, help="If set, save results to this NPZ path")
+    parser.add_argument(
+        "--save",
+        type=str,
+        default=None,
+        help="If set, save results to this NPZ path",
+    )
     args = parser.parse_args()
 
     # Load checkpoint

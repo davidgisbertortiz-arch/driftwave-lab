@@ -48,14 +48,16 @@ class SpectralConv2d(nn.Module):
         self.modes_y = modes_y
 
         scale = 1.0 / (in_channels * out_channels)
-        self.weights1 = nn.Parameter(scale * torch.randn(in_channels, out_channels, modes_x, modes_y, dtype=torch.cfloat))
-        self.weights2 = nn.Parameter(scale * torch.randn(in_channels, out_channels, modes_x, modes_y, dtype=torch.cfloat))
+        self.weights1 = nn.Parameter(
+            scale * torch.randn(in_channels, out_channels, modes_x, modes_y, dtype=torch.cfloat)
+        )
+        self.weights2 = nn.Parameter(
+            scale * torch.randn(in_channels, out_channels, modes_x, modes_y, dtype=torch.cfloat)
+        )
 
     # Complex multiply-sum over in_channels
     @staticmethod
-    def _compl_mul2d(
-        inp: torch.Tensor, weights: torch.Tensor
-    ) -> torch.Tensor:
+    def _compl_mul2d(inp: torch.Tensor, weights: torch.Tensor) -> torch.Tensor:
         # inp: (B, C_in, kx, ky), weights: (C_in, C_out, kx, ky)
         return torch.einsum("bixy,ioxy->boxy", inp, weights)
 
@@ -140,9 +142,7 @@ class FNO2d(nn.Module):
         self.lift = nn.Conv2d(in_channels, width, kernel_size=1)
 
         # Fourier layers
-        self.layers = nn.ModuleList(
-            [FourierLayer(width, modes, modes) for _ in range(n_layers)]
-        )
+        self.layers = nn.ModuleList([FourierLayer(width, modes, modes) for _ in range(n_layers)])
 
         # Projection (two-stage for expressivity)
         self.proj1 = nn.Conv2d(width, width, kernel_size=1)
