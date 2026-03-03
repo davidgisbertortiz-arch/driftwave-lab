@@ -12,7 +12,8 @@ from pathlib import Path
 
 import numpy as np
 import pytest
-import torch
+
+torch = pytest.importorskip("torch", reason="PyTorch not installed — skipping ML pipeline tests")
 
 from driftwave_lab.evaluation.benchmark import BenchmarkResult, benchmark_model
 from driftwave_lab.evaluation.metrics import (
