@@ -11,6 +11,23 @@ import pytest
 
 SCRIPTS_DIR = Path(__file__).resolve().parents[1] / "scripts"
 
+_HAS_TORCH = importlib.util.find_spec("torch") is not None
+
+# Modules that require PyTorch at import time
+_TORCH_MODULES = {
+    "driftwave_lab.models",
+    "driftwave_lab.training",
+    "driftwave_lab.models.unet",
+    "driftwave_lab.models.fno2d",
+    "driftwave_lab.models.pinn_inverse",
+    "driftwave_lab.training.train_baseline",
+    "driftwave_lab.training.train_fno",
+    "driftwave_lab.training.train_pinn",
+    "driftwave_lab.evaluation.rollout",
+    "driftwave_lab.evaluation.metrics",
+    "driftwave_lab.evaluation.benchmark",
+}
+
 
 # ---------------------------------------------------------------------------
 # Package import tests
@@ -34,6 +51,8 @@ class TestPackageImport:
         ],
     )
     def test_import_subpackage(self, module: str) -> None:
+        if module in _TORCH_MODULES and not _HAS_TORCH:
+            pytest.skip("torch not installed")
         mod = importlib.import_module(module)
         assert mod is not None
 
@@ -79,6 +98,8 @@ class TestPlaceholderModules:
         ],
     )
     def test_import_module(self, module: str) -> None:
+        if module in _TORCH_MODULES and not _HAS_TORCH:
+            pytest.skip("torch not installed")
         mod = importlib.import_module(module)
         assert mod is not None
 
