@@ -15,18 +15,18 @@ import pytest
 
 torch = pytest.importorskip("torch", reason="PyTorch not installed — skipping ML pipeline tests")
 
-from driftwave_lab.evaluation.benchmark import BenchmarkResult, benchmark_model
-from driftwave_lab.evaluation.metrics import (
+from driftwave_lab.evaluation.benchmark import BenchmarkResult, benchmark_model  # noqa: E402
+from driftwave_lab.evaluation.metrics import (  # noqa: E402
     channel_mse,
     mse,
     relative_l2,
     rmse,
     rollout_errors,
 )
-from driftwave_lab.evaluation.rollout import autoregressive_rollout, evaluate_rollout
-from driftwave_lab.models import build_model
-from driftwave_lab.models.fno2d import FNO2d
-from driftwave_lab.models.unet import UNet
+from driftwave_lab.evaluation.rollout import autoregressive_rollout, evaluate_rollout  # noqa: E402
+from driftwave_lab.models import build_model  # noqa: E402
+from driftwave_lab.models.fno2d import FNO2d  # noqa: E402
+from driftwave_lab.models.unet import UNet  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Fixtures
