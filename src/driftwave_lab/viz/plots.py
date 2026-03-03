@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from typing import Any
 
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import TwoSlopeNorm
@@ -138,7 +139,7 @@ def plot_spectra(
     _apply_style()
     fig, ax = plt.subplots(1, 1, figsize=(6, 4))
 
-    colors = plt.cm.get_cmap(_CMAP_SPECTRUM)
+    colors = matplotlib.colormaps.get_cmap(_CMAP_SPECTRUM)
     for i, (label, (k, spec)) in enumerate(spectra.items()):
         mask = (k > 0) & (spec > 0)
         ax.loglog(k[mask], spec[mask], label=label, color=colors(i), linewidth=1.5)

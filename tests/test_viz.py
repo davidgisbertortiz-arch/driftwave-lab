@@ -21,7 +21,7 @@ class TestSpectra:
         from driftwave_lab.evaluation.spectra import spectrum_from_field
         from driftwave_lab.solver.spectral import SpectralGrid
 
-        grid = SpectralGrid(nx=32, Lx=2 * np.pi)
+        grid = SpectralGrid(32, 32, 2 * np.pi, 2 * np.pi)
         field = np.random.default_rng(0).standard_normal((32, 32))
         k, spectrum = spectrum_from_field(field, grid)
         assert k.ndim == 1
@@ -33,7 +33,7 @@ class TestSpectra:
         from driftwave_lab.evaluation.spectra import compare_spectra
         from driftwave_lab.solver.spectral import SpectralGrid
 
-        grid = SpectralGrid(nx=32, Lx=2 * np.pi)
+        grid = SpectralGrid(32, 32, 2 * np.pi, 2 * np.pi)
         rng = np.random.default_rng(42)
         fields = {
             "solver": rng.standard_normal((32, 32)),
@@ -49,7 +49,7 @@ class TestSpectra:
         from driftwave_lab.evaluation.spectra import spectral_mismatch
         from driftwave_lab.solver.spectral import SpectralGrid
 
-        grid = SpectralGrid(nx=32, Lx=2 * np.pi)
+        grid = SpectralGrid(32, 32, 2 * np.pi, 2 * np.pi)
         rng = np.random.default_rng(7)
         a = rng.standard_normal((32, 32))
         b = rng.standard_normal((32, 32))
@@ -60,7 +60,7 @@ class TestSpectra:
         from driftwave_lab.evaluation.spectra import spectral_mismatch
         from driftwave_lab.solver.spectral import SpectralGrid
 
-        grid = SpectralGrid(nx=32, Lx=2 * np.pi)
+        grid = SpectralGrid(32, 32, 2 * np.pi, 2 * np.pi)
         field = np.random.default_rng(3).standard_normal((32, 32))
         err = spectral_mismatch(field, field, grid)
         assert err == pytest.approx(0.0, abs=1e-12)
@@ -100,7 +100,7 @@ class TestPlots:
 
         fig = plot_benchmark(
             names=["Solver", "FNO", "UNet"],
-            times=[10.0, 0.5, 1.2],
+            one_step_ms=[10.0, 0.5, 1.2],
             n_params=[0, 500_000, 800_000],
         )
         assert isinstance(fig, plt.Figure)
@@ -111,11 +111,9 @@ class TestPlots:
 
         from driftwave_lab.viz.plots import plot_rollout_error
 
-        steps = np.arange(20)
         fig = plot_rollout_error(
-            mse=np.linspace(0, 0.1, 20),
-            rel_l2=np.linspace(0, 0.5, 20),
-            steps=steps,
+            mse_values=np.linspace(0, 0.1, 20),
+            rel_l2_values=np.linspace(0, 0.5, 20),
         )
         assert isinstance(fig, plt.Figure)
         plt.close(fig)

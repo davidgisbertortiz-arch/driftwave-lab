@@ -87,7 +87,7 @@ def make_hero_gif(
 
         fig.colorbar(im1, ax=[ax1, ax2], shrink=0.85, pad=0.02, label=field_name)
         fig.suptitle(f"Step {i}", fontsize=11, fontweight="bold")
-        fig.tight_layout(rect=[0, 0, 0.92, 0.95])
+        fig.subplots_adjust(left=0.06, right=0.88, top=0.88, bottom=0.12)
 
         rgb = _render_frame_to_array(fig)
         plt.close(fig)
