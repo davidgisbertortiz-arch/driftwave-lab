@@ -168,9 +168,7 @@ class TestGifs:
         assert arr.dtype == np.uint8
         plt.close(fig)
 
-    def test_make_hero_gif_creates_file(self, tmp_path: "Path") -> None:
-        from pathlib import Path
-
+    def test_make_hero_gif_creates_file(self, tmp_path) -> None:
         from driftwave_lab.viz.gifs import make_hero_gif
 
         rng = np.random.default_rng(0)

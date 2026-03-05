@@ -38,10 +38,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    if args.config is not None:
-        cfg = load_yaml(args.config)
-    else:
-        cfg = _DEFAULT_CONFIG
+    cfg = load_yaml(args.config) if args.config is not None else _DEFAULT_CONFIG
 
     assets = generate_all_assets(cfg)
 

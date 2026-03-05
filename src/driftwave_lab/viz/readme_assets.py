@@ -122,7 +122,6 @@ def generate_hero_gif(
         right_label = "FNO rollout"
     elif truth_n_alt is not None:
         right = [truth_n_alt[i] for i in range(len(truth_n_alt))]
-        right_label = "Solver (seed 2)"
     else:
         raise ValueError("Need either pred_n or truth_n_alt for hero.gif")
 
@@ -237,7 +236,7 @@ def generate_all_assets(cfg: dict[str, Any]) -> dict[str, Path]:
     seed = solver_cfg.get("seed", 0)
     fps = cfg.get("fps", 8)
 
-    print(f"[assets] Running solver ({nx}×{nx}, {n_steps} steps, seed={seed})...")
+    print(f"[assets] Running solver ({nx}x{nx}, {n_steps} steps, seed={seed})...")
     t0 = time.perf_counter()
     data = _run_solver(nx=nx, n_steps=n_steps, save_every=save_every, seed=seed)
     truth_n = data["n"]
@@ -274,10 +273,10 @@ def generate_all_assets(cfg: dict[str, Any]) -> dict[str, Path]:
         )
 
         # rollout error metrics
+        import torch
+
         from driftwave_lab.evaluation.metrics import mse as compute_mse
         from driftwave_lab.evaluation.metrics import relative_l2 as compute_rel_l2
-
-        import torch
 
         mse_vals = []
         rel_vals = []

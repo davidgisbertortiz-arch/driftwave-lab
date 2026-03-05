@@ -208,7 +208,7 @@ def plot_benchmark(
                 ax.text(
                     bar.get_width() + max(one_step_ms) * 0.15,
                     bar.get_y() + bar.get_height() / 2,
-                    f"({speedup:.0f}× faster)",
+                    f"({speedup:.0f}x faster)",
                     va="center",
                     fontsize=8,
                     color="#666666",
