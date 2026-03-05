@@ -119,7 +119,6 @@ def generate_hero_gif(
     """Generate ``hero.gif`` — truth vs prediction (or two solver runs)."""
     if pred_n is not None:
         right = [pred_n[i] for i in range(len(pred_n))]
-        right_label = "FNO rollout"
     elif truth_n_alt is not None:
         right = [truth_n_alt[i] for i in range(len(truth_n_alt))]
     else:
